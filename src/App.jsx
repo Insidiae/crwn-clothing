@@ -1,45 +1,37 @@
 import * as React from "react";
 
+import Directory from "./components/Directory";
+
 function App() {
-	return (
-		<div className="categories">
-			<div className="category">
-				{/* <img src="" alt="" /> */}
-				<div className="category__body">
-					<h2>Hats</h2>
-					<p>Shop Now</p>
-				</div>
-			</div>
-			<div className="category">
-				{/* <img src="" alt="" /> */}
-				<div className="category__body">
-					<h2>Jackets</h2>
-					<p>Shop Now</p>
-				</div>
-			</div>
-			<div className="category">
-				{/* <img src="" alt="" /> */}
-				<div className="category__body">
-					<h2>Sneakers</h2>
-					<p>Shop Now</p>
-				</div>
-			</div>
-			<div className="category">
-				{/* <img src="" alt="" /> */}
-				<div className="category__body">
-					<h2>Women&apos;s</h2>
-					<p>Shop Now</p>
-				</div>
-			</div>
-			<div className="category">
-				{/* <img src="" alt="" /> */}
-				<div className="category__body">
-					<h2>Men&apos;s</h2>
-					<p>Shop Now</p>
-				</div>
-			</div>
-		</div>
-	);
+	const categories = [
+		{
+			id: 1,
+			title: "hats",
+			imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
+		},
+		{
+			id: 2,
+			title: "jackets",
+			imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
+		},
+		{
+			id: 3,
+			title: "sneakers",
+			imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
+		},
+		{
+			id: 4,
+			title: "womens",
+			imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
+		},
+		{
+			id: 5,
+			title: "mens",
+			imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
+		},
+	];
+
+	return <Directory categories={categories} />;
 }
 
 export default App;

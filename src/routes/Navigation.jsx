@@ -14,7 +14,7 @@ function Navigation() {
 					<Link to="/shop" className="py-2 px-4 uppercase cursor-pointer">
 						Shop
 					</Link>
-					<Link to="/sign-in" className="py-2 px-4 uppercase cursor-pointer">
+					<Link to="/auth" className="py-2 px-4 uppercase cursor-pointer">
 						Sign In
 					</Link>
 				</div>

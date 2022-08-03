@@ -25,6 +25,7 @@
 				"allowTemplateLiterals": true
 			}
 		],
+		"no-console": ["warn", { "allow": ["warn", "error"] }],
 		"no-unused-vars": 1,
 		"indent": ["error", "tab"],
 		"react/prop-types": 1

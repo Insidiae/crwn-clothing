@@ -40,6 +40,7 @@ function SignUpForm() {
 
 			if (response) {
 				await createUserDocumentFromAuth(response.user, { displayName });
+
 				setFormFields(defaultFormFields);
 			}
 		} catch (err) {
@@ -63,6 +64,7 @@ function SignUpForm() {
 					required
 					type="text"
 					name="displayName"
+					id="signup-display-name"
 					label="Display Name"
 					value={displayName}
 					onChange={handleChange}
@@ -71,6 +73,7 @@ function SignUpForm() {
 					required
 					type="email"
 					name="email"
+					id="signup-email"
 					label="Email"
 					value={email}
 					onChange={handleChange}
@@ -79,6 +82,7 @@ function SignUpForm() {
 					required
 					type="password"
 					name="password"
+					id="signup-password"
 					label="Password"
 					value={password}
 					onChange={handleChange}
@@ -87,6 +91,7 @@ function SignUpForm() {
 					required
 					type="password"
 					name="confirmPassword"
+					id="signup-confirm-password"
 					label="Confirm Password"
 					value={confirmPassword}
 					onChange={handleChange}

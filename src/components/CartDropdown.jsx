@@ -1,6 +1,6 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 
-import Button from "./Button";
 import CartItem from "./CartItem";
 
 import { useCart } from "../context/cartContext";
@@ -15,7 +15,12 @@ function CartDropdown() {
 					<CartItem key={cartItem.id} cartItem={cartItem} />
 				))}
 			</div>
-			<Button className="mt-auto">Go to Checkout</Button>
+			<Link
+				to="/checkout"
+				className="min-w-[10rem] w-auto mt-auto h-12 py-0 px-9 border border-black flex justify-center items-center bg-white text-black text-base font-bold uppercase tracking-[0.5px] cursor-pointer transition hover:border-transparent hover:bg-black hover:text-white"
+			>
+				Go to Checkout
+			</Link>
 		</div>
 	);
 }

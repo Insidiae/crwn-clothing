@@ -5,7 +5,10 @@ const CartContext = React.createContext({
 	setIsCartOpen: () => {},
 	cartItems: [],
 	addItemToCart: () => {},
+	reduceItemFromCart: () => {},
+	removeItemFromCart: () => {},
 	cartCount: 0,
+	cartTotal: 0,
 });
 CartContext.displayName = "CartContext";
 
@@ -19,8 +22,22 @@ function CartProvider(props) {
 		0
 	);
 
+	const cartTotal = cartItems.reduce(
+		(currentTotal, cartItem) =>
+			currentTotal + cartItem.quantity * cartItem.price,
+		0
+	);
+
 	function addItemToCart(productToAdd) {
 		setCartItems(addCartItem(cartItems, productToAdd));
+	}
+
+	function reduceItemFromCart(cartItemToReduce) {
+		setCartItems(reduceCartItem(cartItems, cartItemToReduce));
+	}
+
+	function removeItemFromCart(cartItemToRemove) {
+		setCartItems(removeCartItem(cartItems, cartItemToRemove));
 	}
 
 	const value = {
@@ -28,7 +45,10 @@ function CartProvider(props) {
 		setIsCartOpen,
 		cartItems,
 		addItemToCart,
+		reduceItemFromCart,
+		removeItemFromCart,
 		cartCount,
+		cartTotal,
 	};
 
 	return <CartContext.Provider value={value} {...props} />;
@@ -48,6 +68,26 @@ function addCartItem(cartItems, productToAdd) {
 	}
 
 	return [...cartItems, { ...productToAdd, quantity: 1 }];
+}
+
+function reduceCartItem(cartItems, cartItemToReduce) {
+	const existingCartItem = cartItems.find(
+		(cartItem) => cartItem.id === cartItemToReduce.id
+	);
+
+	if (existingCartItem.quantity === 1) {
+		return cartItems.filter((cartItem) => cartItem.id !== cartItemToReduce.id);
+	}
+
+	return cartItems.map((cartItem) =>
+		cartItem.id === cartItemToReduce.id
+			? { ...cartItem, quantity: cartItem.quantity - 1 }
+			: cartItem
+	);
+}
+
+function removeCartItem(cartItems, cartItemToRemove) {
+	return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
 }
 
 function useCart() {

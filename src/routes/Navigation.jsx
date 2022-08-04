@@ -1,7 +1,11 @@
 import * as React from "react";
 import { Outlet, Link } from "react-router-dom";
 
+import CartIcon from "../components/CartIcon";
+import CartDropdown from "../components/CartDropdown";
+
 import { useUser } from "../context/userContext";
+import { useCart } from "../context/cartContext";
 
 import { signOutUser } from "../utils/firebase";
 
@@ -9,9 +13,10 @@ import { ReactComponent as CrwnLogo } from "../assets/crown.svg";
 
 function Navigation() {
 	const { currentUser } = useUser();
+	const { isCartOpen } = useCart();
 
 	return (
-		<>
+		<div className="py-5 px-10">
 			<div className="w-full h-16 mb-6 flex justify-between">
 				<Link to="/" className="relative w-16 h-full p-6">
 					<CrwnLogo />
@@ -32,11 +37,13 @@ function Navigation() {
 							Sign In
 						</Link>
 					)}
+					<CartIcon />
 				</div>
+				{isCartOpen ? <CartDropdown /> : null}
 			</div>
 
 			<Outlet />
-		</>
+		</div>
 	);
 }
 

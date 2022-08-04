@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { createAction } from "../utils/reducer";
+
 const CartContext = React.createContext({
 	isCartOpen: false,
 	setIsCartOpen: () => {},
@@ -12,32 +14,92 @@ const CartContext = React.createContext({
 });
 CartContext.displayName = "CartContext";
 
-function CartProvider(props) {
-	const [isCartOpen, setIsCartOpen] = React.useState(false);
-	const [cartItems, setCartItems] = React.useState([]);
+function cartReducer(state, action) {
+	switch (action.type) {
+		case CART_ACTION_TYPES.SET_CART_ITEMS:
+			return {
+				...state,
+				...updateCartItemsReducer(action.payload),
+			};
+		case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+			return {
+				...state,
+				//? Simulate setState allowing a regular value OR a function
+				isCartOpen:
+					typeof action.payload === "function"
+						? action.payload(state.isCartOpen)
+						: action.payload,
+			};
+		default:
+			throw new Error(`Invalid action type "${action.type}".`);
+	}
+}
 
-	//? https://kentcdodds.com/blog/dont-sync-state-derive-it
-	const cartCount = cartItems.reduce(
+//? https://kentcdodds.com/blog/dont-sync-state-derive-it#what-about-usereducer
+function updateCartItemsReducer(newCartItems) {
+	const newCartCount = newCartItems.reduce(
 		(count, cartItem) => count + cartItem.quantity,
 		0
 	);
 
-	const cartTotal = cartItems.reduce(
+	const newCartTotal = newCartItems.reduce(
 		(currentTotal, cartItem) =>
 			currentTotal + cartItem.quantity * cartItem.price,
 		0
 	);
 
+	return {
+		cartItems: newCartItems,
+		cartCount: newCartCount,
+		cartTotal: newCartTotal,
+	};
+}
+
+export const CART_ACTION_TYPES = {
+	SET_CART_ITEMS: "SET_CART_ITEMS",
+	SET_IS_CART_OPEN: "SET_IS_CART_OPEN",
+};
+
+const INITIAL_STATE = {
+	isCartOpen: false,
+	cartItems: [],
+	cartCount: 0,
+	cartTotal: 0,
+};
+
+function CartProvider(props) {
+	const [state, dispatch] = React.useReducer(cartReducer, INITIAL_STATE);
+	const { isCartOpen, cartItems, cartCount, cartTotal } = state;
+
+	function setIsCartOpen(payload) {
+		dispatch(createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, payload));
+	}
+
 	function addItemToCart(productToAdd) {
-		setCartItems(addCartItem(cartItems, productToAdd));
+		dispatch(
+			createAction(
+				CART_ACTION_TYPES.SET_CART_ITEMS,
+				addCartItem(cartItems, productToAdd)
+			)
+		);
 	}
 
 	function reduceItemFromCart(cartItemToReduce) {
-		setCartItems(reduceCartItem(cartItems, cartItemToReduce));
+		dispatch(
+			createAction(
+				CART_ACTION_TYPES.SET_CART_ITEMS,
+				reduceCartItem(cartItems, cartItemToReduce)
+			)
+		);
 	}
 
 	function removeItemFromCart(cartItemToRemove) {
-		setCartItems(removeCartItem(cartItems, cartItemToRemove));
+		dispatch(
+			createAction(
+				CART_ACTION_TYPES.SET_CART_ITEMS,
+				removeCartItem(cartItems, cartItemToRemove)
+			)
+		);
 	}
 
 	const value = {

@@ -1,17 +1,42 @@
 import * as React from "react";
+
 import {
 	onAuthStateChangedListener,
 	createUserDocumentFromAuth,
 } from "../utils/firebase";
+import { createAction } from "../utils/reducer";
 
 const UserContext = React.createContext({
 	currentUser: null,
-	setCurrentUser: () => null,
+	setCurrentUser: () => {},
 });
 UserContext.displayName = "UserContext";
 
+function userReducer(state, action) {
+	switch (action.type) {
+		case USER_ACTION_TYPES.SET_CURRENT_USER:
+			return { ...state, currentUser: action.payload };
+		default:
+			throw new Error(`Invalid action type "${action.type}".`);
+	}
+}
+
+export const USER_ACTION_TYPES = {
+	SET_CURRENT_USER: "SET_CURRENT_USER",
+};
+
+const INITIAL_STATE = {
+	currentUser: null,
+};
+
 function UserProvider(props) {
-	const [currentUser, setCurrentUser] = React.useState(null);
+	const [state, dispatch] = React.useReducer(userReducer, INITIAL_STATE);
+	const { currentUser } = state;
+
+	function setCurrentUser(user) {
+		dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
+	}
+
 	const value = { currentUser, setCurrentUser };
 
 	React.useEffect(() => {

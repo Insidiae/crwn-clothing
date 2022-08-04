@@ -27,7 +27,7 @@
 		],
 		"no-console": ["warn", { "allow": ["warn", "error"] }],
 		"no-unused-vars": 1,
-		"indent": ["error", "tab"],
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"react/prop-types": 1
 	}
 }

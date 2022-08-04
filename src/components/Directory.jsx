@@ -9,7 +9,7 @@ function Directory() {
 		<div className="w-full flex flex-wrap justify-between">
 			{Object.keys(categoriesMap).map((category) => (
 				<DirectoryItem
-					key={categoriesMap[category].id}
+					key={categoriesMap[category].title}
 					category={categoriesMap[category]}
 				/>
 			))}

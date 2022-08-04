@@ -2,16 +2,16 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { UserProvider } from "./userContext";
-import { ProductsProvider } from "./productsContext";
+import { CategoriesProvider } from "./categoriesContext";
 import { CartProvider } from "./cartContext";
 
 export function AppProviders({ children }) {
 	return (
 		<BrowserRouter>
 			<UserProvider>
-				<ProductsProvider>
+				<CategoriesProvider>
 					<CartProvider>{children}</CartProvider>
-				</ProductsProvider>
+				</CategoriesProvider>
 			</UserProvider>
 		</BrowserRouter>
 	);

@@ -1,10 +1,11 @@
 import * as React from "react";
 
-import { ReactComponent as ShoppingBagIcon } from "../assets/shopping-bag.svg";
 import { useCart } from "../context/cartContext";
 
+import { ReactComponent as ShoppingBagIcon } from "../assets/shopping-bag.svg";
+
 function CartIcon() {
-	const { setIsCartOpen } = useCart();
+	const { setIsCartOpen, cartCount } = useCart();
 
 	function toggleCart() {
 		setIsCartOpen((prevState) => !prevState);
@@ -16,7 +17,7 @@ function CartIcon() {
 			onClick={toggleCart}
 		>
 			<ShoppingBagIcon className="w-6 h-6" />
-			<span className="absolute bottom-3 text-xs font-bold">0</span>
+			<span className="absolute bottom-3 text-xs font-bold">{cartCount}</span>
 		</div>
 	);
 }

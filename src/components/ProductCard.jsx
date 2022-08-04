@@ -1,7 +1,16 @@
 import * as React from "react";
+
 import Button from "./Button";
 
+import { useCart } from "../context/cartContext";
+
 function ProductCard({ product }) {
+	const { addItemToCart } = useCart();
+
+	function addProductToCart() {
+		addItemToCart(product);
+	}
+
 	return (
 		<div className="group relative w-full h-96 flex flex-col items-center">
 			<img
@@ -16,6 +25,7 @@ function ProductCard({ product }) {
 			<Button
 				theme="inverted"
 				className="absolute hidden top-64 w-4/5 opacity-0 group-hover:flex group-hover:opacity-80"
+				onClick={addProductToCart}
 			>
 				Add to Cart
 			</Button>

@@ -13,7 +13,7 @@ function CategoriesPreview() {
 				<CategoryPreview
 					key={categoryKey}
 					categoryKey={categoryKey}
-					products={categoriesMap[categoryKey]}
+					products={categoriesMap[categoryKey].items}
 				/>
 			))}
 		</>

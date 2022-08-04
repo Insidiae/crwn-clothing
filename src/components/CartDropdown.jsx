@@ -11,9 +11,13 @@ function CartDropdown() {
 	return (
 		<div className="absolute top-24 right-10 w-60 h-[340px] p-5 border border-black bg-white flex flex-col z-[5]">
 			<div className="h-60 flex flex-col overflow-scroll">
-				{cartItems.map((cartItem) => (
-					<CartItem key={cartItem.id} cartItem={cartItem} />
-				))}
+				{cartItems.length ? (
+					cartItems.map((cartItem) => (
+						<CartItem key={cartItem.id} cartItem={cartItem} />
+					))
+				) : (
+					<span className="my-12 mx-auto text-lg">Your cart is empty</span>
+				)}
 			</div>
 			<Link
 				to="/checkout"

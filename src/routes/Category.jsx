@@ -8,18 +8,19 @@ function Category() {
 	const { category } = useParams();
 	const { categoriesMap } = useCategories();
 
-	const products = categoriesMap[category];
+	const products = categoriesMap[category].items;
 
 	return (
-		<div>
-			<h1>{category}</h1>
-
+		<>
+			<h2 className="mb-6 font-bold text-4xl text-center uppercase">
+				{category}
+			</h2>
 			<div className="grid grid-cols-4 gap-x-2 gap-y-12">
 				{products?.map((product) => (
 					<ProductCard key={product.id} product={product} />
 				))}
 			</div>
-		</div>
+		</>
 	);
 }
 

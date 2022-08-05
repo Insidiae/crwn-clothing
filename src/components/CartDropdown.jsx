@@ -1,12 +1,13 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import CartItem from "./CartItem";
 
-import { useCart } from "../context/cartContext";
+import { selectCartItems } from "../store/cart/cartSelector";
 
 function CartDropdown() {
-	const { cartItems } = useCart();
+	const cartItems = useSelector(selectCartItems);
 
 	return (
 		<div className="absolute top-24 right-10 w-60 h-[340px] p-5 border border-black bg-white flex flex-col z-[5]">

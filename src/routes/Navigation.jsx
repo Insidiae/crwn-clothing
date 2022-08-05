@@ -5,9 +5,8 @@ import { Outlet, Link } from "react-router-dom";
 import CartIcon from "../components/CartIcon";
 import CartDropdown from "../components/CartDropdown";
 
-import { useCart } from "../context/cartContext";
-
 import { selectUserSlice } from "../store/user/userSelector";
+import { selectIsCartOpen } from "../store/cart/cartSelector";
 
 import { signOutUser } from "../utils/firebase";
 
@@ -16,7 +15,7 @@ import { ReactComponent as CrwnLogo } from "../assets/crown.svg";
 function Navigation() {
 	const { currentUser } = useSelector(selectUserSlice);
 
-	const { isCartOpen } = useCart();
+	const isCartOpen = useSelector(selectIsCartOpen);
 
 	return (
 		<div className="py-5 px-10">

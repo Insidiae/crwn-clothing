@@ -1,11 +1,13 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 
 import CheckoutItem from "../components/CheckoutItem";
 
-import { useCart } from "../context/cartContext";
+import { selectCartItems, selectCartTotal } from "../store/cart/cartSelector";
 
 function Checkout() {
-	const { cartItems, cartTotal } = useCart();
+	const cartItems = useSelector(selectCartItems);
+	const cartTotal = useSelector(selectCartTotal);
 
 	return (
 		<div className="w-7/12 min-h-[90vh] mt-12 mx-auto mb-0 flex flex-col items-center">

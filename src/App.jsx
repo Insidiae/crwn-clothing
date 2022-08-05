@@ -10,10 +10,12 @@ import Authentication from "./routes/Authentication";
 import Checkout from "./routes/Checkout";
 
 import { setCurrentUser } from "./store/user/userAction";
+import { setCategoriesMap } from "./store/categories/categoriesAction";
 
 import {
 	onAuthStateChangedListener,
 	createUserDocumentFromAuth,
+	getCategoriesAndDocuments,
 } from "./utils/firebase";
 
 function App() {
@@ -30,6 +32,12 @@ function App() {
 		return () => {
 			unsubscribe();
 		};
+	}, [dispatch]);
+
+	React.useEffect(() => {
+		getCategoriesAndDocuments().then((categoriesMap) => {
+			dispatch(setCategoriesMap(categoriesMap));
+		});
 	}, [dispatch]);
 
 	return (

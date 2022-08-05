@@ -1,14 +1,17 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+
 import ProductCard from "../components/ProductCard";
 
-import { useCategories } from "../context/categoriesContext";
+import { selectCategoriesSlice } from "../store/categories/categoriesSelector";
 
 function Category() {
-	const { category } = useParams();
-	const { categoriesMap } = useCategories();
+	const { categoriesMap } = useSelector(selectCategoriesSlice);
 
-	const products = categoriesMap[category].items;
+	const { category } = useParams();
+
+	const products = categoriesMap[category]?.items;
 
 	return (
 		<>

@@ -16,6 +16,7 @@ specifiers:
   react-router-dom: '6'
   redux: ^4.2.0
   redux-logger: ^3.0.6
+  reselect: ^4.1.6
   tailwindcss: ^3.1.7
   vite: ^3.0.0
   vite-plugin-svgr: ^2.2.1
@@ -28,6 +29,7 @@ dependencies:
   react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
   redux: 4.2.0
   redux-logger: 3.0.6
+  reselect: 4.1.6
   vite-plugin-svgr: 2.2.1_vite@3.0.4
 
 devDependencies:
@@ -2902,6 +2904,10 @@ packages:
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /reselect/4.1.6:
+    resolution: {integrity: sha512-ZovIuXqto7elwnxyXbBtCPo9YFEr3uJqj2rRbcOOog1bmu2Ag85M4hixSwFWyaBMKXNgvPaJ9OSu9SkBPIeJHQ==}
     dev: false
 
   /resolve-from/4.0.0:

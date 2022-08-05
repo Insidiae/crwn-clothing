@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 
 import CategoryPreview from "../components/CategoryPreview";
 
-import { selectCategoriesSlice } from "../store/categories/categoriesSelector";
+import { selectCategoriesMap } from "../store/categories/categoriesSelector";
 
 function CategoriesPreview() {
-	const { categoriesMap } = useSelector(selectCategoriesSlice);
+	const categoriesMap = useSelector(selectCategoriesMap);
 
 	return (
 		<>

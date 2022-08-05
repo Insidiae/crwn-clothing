@@ -4,11 +4,10 @@ import { useParams } from "react-router-dom";
 
 import ProductCard from "../components/ProductCard";
 
-import { selectCategoriesSlice } from "../store/categories/categoriesSelector";
+import { selectCategoriesMap } from "../store/categories/categoriesSelector";
 
 function Category() {
-	const { categoriesMap } = useSelector(selectCategoriesSlice);
-
+	const categoriesMap = useSelector(selectCategoriesMap);
 	const { category } = useParams();
 
 	const products = categoriesMap[category]?.items;

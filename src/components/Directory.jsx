@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 
 import DirectoryItem from "./DirectoryItem";
 
-import { selectCategoriesSlice } from "../store/categories/categoriesSelector";
+import { selectCategoriesMap } from "../store/categories/categoriesSelector";
 
 function Directory() {
-	const { categoriesMap } = useSelector(selectCategoriesSlice);
+	const categoriesMap = useSelector(selectCategoriesMap);
 
 	return (
 		<div className="w-full flex flex-wrap justify-between">

@@ -10,7 +10,7 @@ import Authentication from "./routes/Authentication";
 import Checkout from "./routes/Checkout";
 
 import { setCurrentUser } from "./store/user/userAction";
-import { setCategoriesMap } from "./store/categories/categoriesAction";
+import { setCategories } from "./store/categories/categoriesAction";
 
 import {
 	onAuthStateChangedListener,
@@ -35,8 +35,8 @@ function App() {
 	}, [dispatch]);
 
 	React.useEffect(() => {
-		getCategoriesAndDocuments().then((categoriesMap) => {
-			dispatch(setCategoriesMap(categoriesMap));
+		getCategoriesAndDocuments().then((categories) => {
+			dispatch(setCategories(categories));
 		});
 	}, [dispatch]);
 

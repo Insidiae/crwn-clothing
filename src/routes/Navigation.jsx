@@ -1,18 +1,21 @@
 import * as React from "react";
+import { useSelector } from "react-redux";
 import { Outlet, Link } from "react-router-dom";
 
 import CartIcon from "../components/CartIcon";
 import CartDropdown from "../components/CartDropdown";
 
-import { useUser } from "../context/userContext";
 import { useCart } from "../context/cartContext";
+
+import { selectUserSlice } from "../store/user/userSelector";
 
 import { signOutUser } from "../utils/firebase";
 
 import { ReactComponent as CrwnLogo } from "../assets/crown.svg";
 
 function Navigation() {
-	const { currentUser } = useUser();
+	const { currentUser } = useSelector(selectUserSlice);
+
 	const { isCartOpen } = useCart();
 
 	return (

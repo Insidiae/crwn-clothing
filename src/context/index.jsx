@@ -1,18 +1,20 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
-import { UserProvider } from "./userContext";
 import { CategoriesProvider } from "./categoriesContext";
 import { CartProvider } from "./cartContext";
+
+import { store } from "../store/store";
 
 export function AppProviders({ children }) {
 	return (
 		<BrowserRouter>
-			<UserProvider>
+			<Provider store={store}>
 				<CategoriesProvider>
 					<CartProvider>{children}</CartProvider>
 				</CategoriesProvider>
-			</UserProvider>
+			</Provider>
 		</BrowserRouter>
 	);
 }

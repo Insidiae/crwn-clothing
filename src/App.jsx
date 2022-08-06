@@ -10,12 +10,11 @@ import Authentication from "./routes/Authentication";
 import Checkout from "./routes/Checkout";
 
 import { setCurrentUser } from "./store/user/userAction";
-import { setCategories } from "./store/categories/categoriesAction";
+import { fetchCategoriesAsync } from "./store/categories/categoriesAction";
 
 import {
 	onAuthStateChangedListener,
 	createUserDocumentFromAuth,
-	getCategoriesAndDocuments,
 } from "./utils/firebase";
 
 function App() {
@@ -35,9 +34,7 @@ function App() {
 	}, [dispatch]);
 
 	React.useEffect(() => {
-		getCategoriesAndDocuments().then((categories) => {
-			dispatch(setCategories(categories));
-		});
+		dispatch(fetchCategoriesAsync());
 	}, [dispatch]);
 
 	return (

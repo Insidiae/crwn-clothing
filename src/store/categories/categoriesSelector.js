@@ -22,3 +22,8 @@ export const selectCategoriesMap = createSelector(
 			return categories;
 		}, {})
 );
+
+export const selectCategoriesStatus = createSelector(
+	[selectCategoriesSlice],
+	(categoriesSlice) => categoriesSlice.status
+);

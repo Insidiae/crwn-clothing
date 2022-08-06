@@ -7,7 +7,8 @@
 	"extends": [
 		"eslint:recommended",
 		"plugin:react/recommended",
-		"plugin:react-hooks/recommended"
+		"plugin:react-hooks/recommended",
+		"plugin:prettier/recommended"
 	],
 	"parserOptions": {
 		"ecmaFeatures": {
@@ -18,17 +19,8 @@
 	},
 	"plugins": ["react"],
 	"rules": {
-		"quotes": [
-			2,
-			"double",
-			{
-				"avoidEscape": true,
-				"allowTemplateLiterals": true
-			}
-		],
 		"no-console": ["warn", { "allow": ["warn", "error"] }],
 		"no-unused-vars": 1,
-		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"react/prop-types": 1
 	}
 }

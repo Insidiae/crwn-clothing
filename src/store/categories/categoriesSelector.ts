@@ -1,6 +1,9 @@
 import { createSelector } from "reselect";
 
-export const selectCategoriesSlice = (state) => state.categories;
+import type { CategoriesState, CategoriesMap } from "./categoriesTypes";
+
+export const selectCategoriesSlice = (state): CategoriesState =>
+	state.categories;
 
 export const selectCategoriesDocuments = createSelector(
 	[selectCategoriesSlice],
@@ -20,7 +23,7 @@ export const selectCategoriesMap = createSelector(
 			};
 
 			return categories;
-		}, {})
+		}, {} as CategoriesMap)
 );
 
 export const selectCategoriesStatus = createSelector(

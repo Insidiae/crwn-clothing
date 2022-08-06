@@ -5,13 +5,17 @@ function Button({ children, className, theme = "default", ...otherProps }) {
 
 	return (
 		<button
-			className={`min-w-[10rem] w-auto h-12 py-0 px-9 border flex justify-center items-center text-base font-bold uppercase tracking-[0.5px] cursor-pointer transition ${themeStyle} ${className}`}
+			className={`min-w-[10rem] w-auto h-12 py-0 px-9 border flex justify-center items-center text-base font-bold uppercase tracking-[0.5px] cursor-pointer transition disabled:cursor-not-allowed ${themeStyle} ${className}`}
 			{...otherProps}
 		>
-			{children}
+			{otherProps.disabled ? <ButtonSpinner /> : children}
 		</button>
 	);
 }
+
+const ButtonSpinner = () => (
+	<div className="inline-block w-7 h-7 border-[3px] border-[rgba(195, 195, 195, 0.6)] border-t-zinc-600 border-op rounded-full animate-spin"></div>
+);
 
 const buttonThemeStyles = {
 	default:

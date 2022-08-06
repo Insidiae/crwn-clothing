@@ -2,6 +2,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 
 import CheckoutItem from "../components/CheckoutItem";
+import PaymentForm from "../components/PaymentForm";
 
 import { selectCartItems, selectCartTotal } from "../store/cart/cartSelector";
 
@@ -34,6 +35,8 @@ function Checkout() {
 			))}
 
 			<span className="mt-7 ml-auto text-4xl">Total: ${cartTotal}</span>
+
+			<PaymentForm />
 		</div>
 	);
 }

@@ -9,31 +9,14 @@ import Category from "./routes/Category";
 import Authentication from "./routes/Authentication";
 import Checkout from "./routes/Checkout";
 
-import { setCurrentUser } from "./store/user/userAction";
 import { fetchCategoriesStart } from "./store/categories/categoriesAction";
-
-import {
-	onAuthStateChangedListener,
-	createUserDocumentFromAuth,
-} from "./utils/firebase";
+import { checkUserSession } from "./store/user/userAction";
 
 function App() {
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		const unsubscribe = onAuthStateChangedListener((user) => {
-			if (user) {
-				createUserDocumentFromAuth(user);
-			}
-			dispatch(setCurrentUser(user));
-		});
-
-		return () => {
-			unsubscribe();
-		};
-	}, [dispatch]);
-
-	React.useEffect(() => {
+		dispatch(checkUserSession());
 		dispatch(fetchCategoriesStart());
 	}, [dispatch]);
 

@@ -94,7 +94,7 @@ export async function createUserDocumentFromAuth(
 			}
 		}
 
-		return userDocRef;
+		return userSnapshot;
 	}
 }
 
@@ -116,3 +116,16 @@ export async function signOutUser() {
 
 export const onAuthStateChangedListener = (callback) =>
 	onAuthStateChanged(auth, callback);
+
+export function getCurrentUser() {
+	return new Promise((resolve, reject) => {
+		const unsubscribe = onAuthStateChanged(
+			auth,
+			(authUser) => {
+				unsubscribe();
+				resolve(authUser);
+			},
+			reject
+		);
+	});
+}

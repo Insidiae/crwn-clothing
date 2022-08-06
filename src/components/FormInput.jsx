@@ -17,7 +17,7 @@ function FormInput({ id, label, name, ...otherProps }) {
 			{label ? (
 				<label
 					htmlFor={id}
-					className={`absolute text-gray-500 transition-all delay-300 ease-in-out pointer-events-none ${labelShrinkStyles} peer-empty:text-base peer-focus:-top-3 peer-focus:text-xs peer-focus:text-black`}
+					className={`absolute text-gray-500 transition-all delay-300 ease-in-out pointer-events-none ${labelShrinkStyles} peer-focus:-top-3 peer-focus:text-xs peer-focus:text-black`}
 				>
 					{label}
 				</label>

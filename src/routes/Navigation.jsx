@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Outlet, Link } from "react-router-dom";
 
 import CartIcon from "../components/CartIcon";
@@ -11,11 +11,16 @@ import { selectIsCartOpen } from "../store/cart/cartSelector";
 import { signOutUser } from "../utils/firebase";
 
 import { ReactComponent as CrwnLogo } from "../assets/crown.svg";
+import { signOutStart } from "../store/user/userAction";
 
 function Navigation() {
+	const dispatch = useDispatch();
+
 	const { currentUser } = useSelector(selectUserSlice);
 
 	const isCartOpen = useSelector(selectIsCartOpen);
+
+	const handleSignOut = () => dispatch(signOutStart());
 
 	return (
 		<div className="py-5 px-10">
@@ -30,7 +35,7 @@ function Navigation() {
 					{currentUser ? (
 						<span
 							className="py-2 px-4 uppercase cursor-pointer"
-							onClick={signOutUser}
+							onClick={handleSignOut}
 						>
 							Sign Out
 						</span>

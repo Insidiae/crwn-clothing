@@ -10,6 +10,6 @@ export enum CART_ACTION_TYPES {
 }
 
 export type CartState = {
-	isCartOpen: boolean;
-	cartItems: CartItem[];
+	readonly isCartOpen: boolean;
+	readonly cartItems: CartItem[];
 };

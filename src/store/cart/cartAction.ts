@@ -7,12 +7,12 @@ import type { CategoryItem } from "../categories/categoriesTypes";
 import type { ActionWithPayload } from "../../utils/reducer";
 
 export const setIsCartOpen = withMatcher(
-	(payload: boolean | ((prevState: boolean) => boolean)): SetIsCartOpen =>
+	(payload: boolean | ((prevState: boolean) => boolean)): SetIsCartOpenAction =>
 		createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, payload)
 );
 
 export const setCartItems = withMatcher(
-	(cartItems: CartItem[]): SetCartItems =>
+	(cartItems: CartItem[]): SetCartItemsAction =>
 		createAction(CART_ACTION_TYPES.SET_CART_ITEMS, cartItems)
 );
 
@@ -31,12 +31,12 @@ export const removeItemFromCart = (
 	cartItemToRemove: CartItem
 ) => setCartItems(removeCartItem(cartItems, cartItemToRemove));
 
-export type SetIsCartOpen = ActionWithPayload<
+export type SetIsCartOpenAction = ActionWithPayload<
 	CART_ACTION_TYPES.SET_IS_CART_OPEN,
 	boolean | ((prevState: boolean) => boolean)
 >;
 
-export type SetCartItems = ActionWithPayload<
+export type SetCartItemsAction = ActionWithPayload<
 	CART_ACTION_TYPES.SET_CART_ITEMS,
 	CartItem[]
 >;

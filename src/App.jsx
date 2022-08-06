@@ -10,7 +10,7 @@ import Authentication from "./routes/Authentication";
 import Checkout from "./routes/Checkout";
 
 import { setCurrentUser } from "./store/user/userAction";
-import { fetchCategoriesAsync } from "./store/categories/categoriesAction";
+import { fetchCategoriesStart } from "./store/categories/categoriesAction";
 
 import {
 	onAuthStateChangedListener,
@@ -34,7 +34,7 @@ function App() {
 	}, [dispatch]);
 
 	React.useEffect(() => {
-		dispatch(fetchCategoriesAsync());
+		dispatch(fetchCategoriesStart());
 	}, [dispatch]);
 
 	return (

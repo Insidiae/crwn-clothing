@@ -13,7 +13,21 @@ import { rootSaga } from "./rootSaga";
 
 import { rootReducer } from "./rootReducer";
 
-const persistConfig = {
+import type { Middleware } from "redux";
+import type { PersistConfig } from "redux-persist";
+import type { RootState } from "./rootReducer";
+
+declare global {
+	interface Window {
+		__REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+	}
+}
+
+type ExtendedPersistConfig = PersistConfig<RootState> & {
+	whitelist: (keyof RootState)[];
+};
+
+const persistConfig: ExtendedPersistConfig = {
 	key: "root",
 	storage,
 	whitelist: ["cart"],
@@ -23,7 +37,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const middlewares = [];
+const middlewares: Middleware[] = [];
 
 if (process.env.NODE_ENV === `development`) {
 	middlewares.push(logger);

@@ -9,3 +9,5 @@ export const rootReducer = combineReducers({
 	categories: categoriesReducer,
 	cart: cartReducer,
 });
+
+export type RootState = ReturnType<typeof rootReducer>;

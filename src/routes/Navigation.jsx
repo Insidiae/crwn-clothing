@@ -5,7 +5,7 @@ import { Outlet, Link } from "react-router-dom";
 import CartIcon from "../components/CartIcon";
 import CartDropdown from "../components/CartDropdown";
 
-import { selectUserSlice } from "../store/user/userSelector";
+import { selectCurrentUser } from "../store/user/userSelector";
 import { selectIsCartOpen } from "../store/cart/cartSelector";
 
 import { ReactComponent as CrwnLogo } from "../assets/crown.svg";
@@ -14,7 +14,7 @@ import { signOutStart } from "../store/user/userAction";
 function Navigation() {
 	const dispatch = useDispatch();
 
-	const { currentUser } = useSelector(selectUserSlice);
+	const currentUser = useSelector(selectCurrentUser);
 
 	const isCartOpen = useSelector(selectIsCartOpen);
 

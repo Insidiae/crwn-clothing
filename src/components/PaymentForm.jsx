@@ -4,14 +4,14 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import Button from "./Button";
 
-import { selectUserSlice } from "../store/user/userSelector";
+import { selectCurrentUser } from "../store/user/userSelector";
 import { selectCartTotal } from "../store/cart/cartSelector";
 
 function PaymentForm() {
 	const stripe = useStripe();
 	const elements = useElements();
 
-	const { currentUser } = useSelector(selectUserSlice);
+	const currentUser = useSelector(selectCurrentUser);
 	const amount = useSelector(selectCartTotal);
 
 	const [isProcessingPayment, setIsProcessingPayment] = React.useState(false);

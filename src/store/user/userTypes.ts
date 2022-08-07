@@ -16,7 +16,7 @@ export enum USER_ACTION_TYPES {
 }
 
 export type UserState = {
-	readonly currentUser: UserData | null;
+	readonly currentUser: (UserData & { id: string }) | null;
 	readonly status: "idle" | "pending" | "rejected" | "resolved";
 	readonly error: Error | null;
 };

@@ -5,20 +5,20 @@ import { Outlet, Link } from "react-router-dom";
 import CartIcon from "../components/CartIcon";
 import CartDropdown from "../components/CartDropdown";
 
-import { selectCurrentUser } from "../store/user/userSelector";
-import { selectIsCartOpen } from "../store/cart/cartSelector";
+import { selectCurrentUser, signOut } from "../store/user/userSlice";
+import { selectIsCartOpen } from "../store/cart/cartSlice";
+
+import type { AppDispatch } from "../store/store";
 
 import { ReactComponent as CrwnLogo } from "../assets/crown.svg";
-import { signOutStart } from "../store/user/userAction";
 
 function Navigation() {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 
 	const currentUser = useSelector(selectCurrentUser);
-
 	const isCartOpen = useSelector(selectIsCartOpen);
 
-	const handleSignOut = () => dispatch(signOutStart());
+	const handleSignOut = () => dispatch(signOut());
 
 	return (
 		<div className="py-5 px-10">

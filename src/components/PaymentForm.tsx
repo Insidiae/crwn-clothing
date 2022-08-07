@@ -4,8 +4,8 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import Button from "./Button";
 
-import { selectCurrentUser } from "../store/user/userSelector";
-import { selectCartTotal } from "../store/cart/cartSelector";
+import { selectCurrentUser } from "../store/user/userSlice";
+import { selectCartTotal } from "../store/cart/cartSlice";
 
 import type { StripeCardElement } from "@stripe/stripe-js";
 

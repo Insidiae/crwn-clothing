@@ -8,7 +8,7 @@ import Spinner from "../components/Spinner";
 import {
 	selectCategoriesMap,
 	selectCategoriesStatus,
-} from "../store/categories/categoriesSelector";
+} from "../store/categories/categoriesSlice";
 
 type CategoryRouteParams = {
 	category: string;
@@ -19,7 +19,7 @@ function Category() {
 	const categoriesMap = useSelector(selectCategoriesMap);
 	const { category } = useParams<CategoryRouteParams>() as CategoryRouteParams;
 
-	const products = categoriesMap[category].items;
+	const products = categoriesMap[category]?.items;
 
 	return (
 		<>

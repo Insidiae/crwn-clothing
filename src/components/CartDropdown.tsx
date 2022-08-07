@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import CartItem from "./CartItem";
 
-import { selectCartItems } from "../store/cart/cartSelector";
+import { selectCartItems } from "../store/cart/cartSlice";
 
 function CartDropdown() {
 	const cartItems = useSelector(selectCartItems);

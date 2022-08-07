@@ -5,9 +5,10 @@ import { AuthErrorCodes } from "firebase/auth";
 import Button from "./Button";
 import FormInput from "./FormInput";
 
-import { signUpStart } from "../store/user/userAction";
+import { signUp } from "../store/user/userSlice";
 
 import type { AuthError } from "firebase/auth";
+import type { AppDispatch } from "../store/store";
 
 const defaultFormFields = {
 	displayName: "",
@@ -17,7 +18,7 @@ const defaultFormFields = {
 };
 
 function SignUpForm() {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 
 	const [formFields, setFormFields] = React.useState(defaultFormFields);
 	const { displayName, email, password, confirmPassword } = formFields;
@@ -37,14 +38,15 @@ function SignUpForm() {
 		}
 
 		try {
-			dispatch(signUpStart(email, password, displayName));
-			setFormFields(defaultFormFields);
+			await dispatch(signUp({ email, password, displayName })).unwrap();
 		} catch (err) {
 			if ((err as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
-				alert("Email alredy in use!");
+				alert("Email already in use!");
 			} else {
 				console.error("There was an error in signing up:", err);
 			}
+		} finally {
+			setFormFields(defaultFormFields);
 		}
 	}
 

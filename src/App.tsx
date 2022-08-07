@@ -9,15 +9,17 @@ import Category from "./routes/Category";
 import Authentication from "./routes/Authentication";
 import Checkout from "./routes/Checkout";
 
-import { fetchCategoriesStart } from "./store/categories/categoriesAction";
-import { checkUserSession } from "./store/user/userAction";
+import { fetchCategories } from "./store/categories/categoriesSlice";
+import { checkUserSession } from "./store/user/userSlice";
+
+import type { AppDispatch } from "./store/store";
 
 function App() {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 
 	React.useEffect(() => {
 		dispatch(checkUserSession());
-		dispatch(fetchCategoriesStart());
+		dispatch(fetchCategories());
 	}, [dispatch]);
 
 	return (

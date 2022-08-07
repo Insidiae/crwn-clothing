@@ -44,14 +44,6 @@ const categoriesSlice = createSlice({
 	},
 });
 
-export const {
-	pending: fetchCategoriesStart,
-	rejected: fetchCategoriesFailed,
-	fulfilled: fetchCategoriesSuccess,
-} = fetchCategories;
-
-export default categoriesSlice.reducer;
-
 export const selectCategoriesSlice = (state: RootState): CategoriesState =>
 	state.categories;
 
@@ -80,3 +72,5 @@ export const selectCategoriesStatus = createSelector(
 	[selectCategoriesSlice],
 	(categoriesSlice) => categoriesSlice.status
 );
+
+export default categoriesSlice.reducer;

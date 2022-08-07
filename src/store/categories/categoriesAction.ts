@@ -6,13 +6,13 @@ import { createAction, withMatcher } from "../../utils/reducer";
 import type { Category } from "./categoriesTypes";
 import type { Action, ActionWithPayload } from "../../utils/reducer";
 
-type FetchCategoriesStartAction =
+export type FetchCategoriesStartAction =
 	Action<CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START>;
-type FetchCategoriesFailedAction = ActionWithPayload<
+export type FetchCategoriesFailedAction = ActionWithPayload<
 	CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED,
 	Error
 >;
-type FetchCategoriesSuccessAction = ActionWithPayload<
+export type FetchCategoriesSuccessAction = ActionWithPayload<
 	CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS,
 	Category[]
 >;

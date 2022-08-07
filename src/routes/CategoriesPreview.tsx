@@ -7,7 +7,7 @@ import Spinner from "../components/Spinner";
 import {
 	selectCategoriesMap,
 	selectCategoriesStatus,
-} from "../store/categories/categoriesSelector";
+} from "../store/categories/categoriesSlice";
 
 function CategoriesPreview() {
 	const categoriesStatus = useSelector(selectCategoriesStatus);

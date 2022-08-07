@@ -6,7 +6,7 @@ import DirectoryItem from "./DirectoryItem";
 import {
 	selectCategoriesMap,
 	selectCategoriesStatus,
-} from "../store/categories/categoriesSelector";
+} from "../store/categories/categoriesSlice";
 import Spinner from "./Spinner";
 
 function Directory() {

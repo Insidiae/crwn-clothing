@@ -10,10 +10,12 @@ import Authentication from "./routes/Authentication";
 import Checkout from "./routes/Checkout";
 
 import { fetchCategories } from "./store/categories/categoriesSlice";
-import { checkUserSession } from "./store/user/userAction";
+import { checkUserSession } from "./store/user/userSlice";
+
+import type { AppDispatch } from "./store/store";
 
 function App() {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 
 	React.useEffect(() => {
 		dispatch(checkUserSession());

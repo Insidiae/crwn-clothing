@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { selectCartCount, toggleIsCartOpen } from "../store/cart/cartSlice";
+import { selectCartCount, setIsCartOpen } from "../store/cart/cartSlice";
 
 import { ReactComponent as ShoppingBagIcon } from "../assets/shopping-bag.svg";
 
@@ -10,7 +10,7 @@ function CartIcon() {
 	const dispatch = useDispatch();
 
 	function toggleCart() {
-		dispatch(toggleIsCartOpen());
+		dispatch(setIsCartOpen((prevState: boolean) => !prevState));
 	}
 
 	return (

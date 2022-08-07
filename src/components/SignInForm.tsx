@@ -5,9 +5,10 @@ import { AuthErrorCodes } from "firebase/auth";
 import Button from "./Button";
 import FormInput from "./FormInput";
 
-import { googleSignInStart, emailSignInStart } from "../store/user/userAction";
+import { googleSignIn, emailSignIn } from "../store/user/userSlice";
 
 import type { AuthError } from "firebase/auth";
+import type { AppDispatch } from "../store/store";
 
 const defaultFormFields = {
 	email: "",
@@ -15,7 +16,7 @@ const defaultFormFields = {
 };
 
 function SignInForm() {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 
 	const [formFields, setFormFields] = React.useState(defaultFormFields);
 	const { email, password } = formFields;
@@ -30,8 +31,7 @@ function SignInForm() {
 		event.preventDefault();
 
 		try {
-			dispatch(emailSignInStart(email, password));
-			setFormFields(defaultFormFields);
+			await dispatch(emailSignIn({ email, password })).unwrap();
 		} catch (err) {
 			const { code } = err as AuthError;
 
@@ -43,11 +43,13 @@ function SignInForm() {
 			} else {
 				console.error("There was an error in signing in:", err);
 			}
+		} finally {
+			setFormFields(defaultFormFields);
 		}
 	}
 
 	async function handleGoogleSignIn() {
-		dispatch(googleSignInStart());
+		dispatch(googleSignIn());
 	}
 
 	return (

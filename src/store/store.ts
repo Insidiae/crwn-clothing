@@ -2,8 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import {
 	persistStore,
 	persistReducer,
-	PERSIST,
+	FLUSH,
 	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -30,11 +34,15 @@ export const store = configureStore({
 		getDefaultMiddleware({
 			serializableCheck: {
 				// Ignore these action types
-				ignoredActions: [PERSIST, REHYDRATE],
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+				// Ignore these field paths in all actions
+				ignoredActionPaths: ["payload.createdAt"],
 				// Ignore these paths in the state
-				ignoredPaths: ["_persist"],
+				ignoredPaths: ["user.currentUser.createdAt"],
 			},
 		}),
 });
 
 export const persistor = persistStore(store);
+
+export type AppDispatch = typeof store.dispatch;

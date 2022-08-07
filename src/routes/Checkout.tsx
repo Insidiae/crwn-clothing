@@ -11,7 +11,7 @@ function Checkout() {
 	const cartTotal = useSelector(selectCartTotal);
 
 	return (
-		<div className="w-7/12 min-h-[90vh] mt-12 mx-auto mb-0 flex flex-col items-center">
+		<div className="w-full min-h-[90vh] mt-12 mx-auto mb-0 flex flex-col items-center xs:w-4/5 lg:w-7/12">
 			<div className="w-full py-2 px-0 border-b border-b-gray-600 flex justify-between">
 				<div className="w-[23%] capitalize">
 					<span>Product</span>

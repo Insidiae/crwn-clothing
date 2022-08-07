@@ -23,7 +23,7 @@ function ProductCard({ product }: { product: CategoryItem }) {
 			/>
 			<div className="w-full h-[5%] flex justify-between text-lg">
 				<span className="w-11/12 mb-4">{product.name}</span>
-				<span className="w-1/12">{product.price}</span>
+				<span className="w-1/12">${product.price}</span>
 			</div>
 			<Button
 				theme="inverted"

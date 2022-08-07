@@ -69,7 +69,7 @@ function PaymentForm() {
 
 	return (
 		<div className="h-72 flex flex-col justify-center items-center">
-			<form onSubmit={handlePayment} className="min-w-[500px] h-24">
+			<form onSubmit={handlePayment} className="w-72 h-24 sm:min-w-[500px]">
 				<h2 className="my-2 mx-0 text-xl font-bold">Credit Card Payment: </h2>
 				<CardElement />
 				<Button

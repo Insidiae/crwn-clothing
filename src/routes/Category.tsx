@@ -28,7 +28,7 @@ function Category() {
 			</h2>
 			{categoriesStatus === "pending" ? <Spinner /> : null}
 			{categoriesStatus === "resolved" ? (
-				<div className="grid grid-cols-4 gap-x-2 gap-y-12">
+				<div className="grid grid-cols-1 gap-x-2 gap-y-12 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
 					{products.map((product) => (
 						<ProductCard key={product.id} product={product} />
 					))}

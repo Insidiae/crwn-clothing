@@ -1,29 +1,27 @@
 import * as React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { selectCartItems } from "../store/cart/cartSelector";
 import {
 	reduceItemFromCart,
 	addItemToCart,
 	removeItemFromCart,
-} from "../store/cart/cartAction";
+} from "../store/cart/cartSlice";
 
 import type { CartItem } from "../store/cart/cartTypes";
 
 function CheckoutItem({ cartItem }: { cartItem: CartItem }) {
-	const cartItems = useSelector(selectCartItems);
 	const dispatch = useDispatch();
 
 	function handleDecrementItem() {
-		dispatch(reduceItemFromCart(cartItems, cartItem));
+		dispatch(reduceItemFromCart(cartItem));
 	}
 
 	function handleAddItem() {
-		dispatch(addItemToCart(cartItems, cartItem));
+		dispatch(addItemToCart(cartItem));
 	}
 
 	function handleRemoveItem() {
-		dispatch(removeItemFromCart(cartItems, cartItem));
+		dispatch(removeItemFromCart(cartItem));
 	}
 
 	return (

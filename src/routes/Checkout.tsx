@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import CheckoutItem from "../components/CheckoutItem";
 import PaymentForm from "../components/PaymentForm";
 
-import { selectCartItems, selectCartTotal } from "../store/cart/cartSelector";
+import { selectCartItems, selectCartTotal } from "../store/cart/cartSlice";
 
 function Checkout() {
 	const cartItems = useSelector(selectCartItems);

@@ -2,6 +2,7 @@ import {
 	createSlice,
 	createAsyncThunk,
 	createSelector,
+	isAnyOf,
 } from "@reduxjs/toolkit";
 
 import {
@@ -100,6 +101,7 @@ export const signUp = createAsyncThunk(
 
 export const signOut = createAsyncThunk("user/SIGN_OUT", async () => {
 	await signOutUser();
+	return null;
 });
 
 const userSlice = createSlice({
@@ -108,61 +110,44 @@ const userSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(checkUserSession.pending, (state) => {
-				state.status = "pending";
-			})
-			.addCase(checkUserSession.rejected, (state, action) => {
-				state.status = "rejected";
-				state.error = action.error as Error;
-			})
-			.addCase(checkUserSession.fulfilled, (state, action) => {
-				state.status = "resolved";
-				state.currentUser = action.payload;
-			})
-			.addCase(googleSignIn.pending, (state) => {
-				state.status = "pending";
-			})
-			.addCase(googleSignIn.rejected, (state, action) => {
-				state.status = "rejected";
-				state.error = action.error as Error;
-			})
-			.addCase(googleSignIn.fulfilled, (state, action) => {
-				state.status = "resolved";
-				state.currentUser = action.payload;
-			})
-			.addCase(emailSignIn.pending, (state) => {
-				state.status = "pending";
-			})
-			.addCase(emailSignIn.rejected, (state, action) => {
-				state.status = "rejected";
-				state.error = action.error as Error;
-			})
-			.addCase(emailSignIn.fulfilled, (state, action) => {
-				state.status = "resolved";
-				state.currentUser = action.payload;
-			})
-			.addCase(signUp.pending, (state) => {
-				state.status = "pending";
-			})
-			.addCase(signUp.rejected, (state, action) => {
-				state.status = "rejected";
-				state.error = action.error as Error;
-			})
-			.addCase(signUp.fulfilled, (state, action) => {
-				state.status = "resolved";
-				state.currentUser = action.payload;
-			})
-			.addCase(signOut.pending, (state) => {
-				state.status = "pending";
-			})
-			.addCase(signOut.rejected, (state, action) => {
-				state.status = "rejected";
-				state.error = action.error as Error;
-			})
-			.addCase(signOut.fulfilled, (state) => {
-				state.status = "resolved";
-				state.currentUser = null;
-			});
+			.addMatcher(
+				isAnyOf(
+					checkUserSession.pending,
+					googleSignIn.pending,
+					emailSignIn.pending,
+					signUp.pending,
+					signOut.pending
+				),
+				(state) => {
+					state.status = "pending";
+				}
+			)
+			.addMatcher(
+				isAnyOf(
+					checkUserSession.rejected,
+					googleSignIn.rejected,
+					emailSignIn.rejected,
+					signUp.rejected,
+					signOut.rejected
+				),
+				(state, action) => {
+					state.status = "rejected";
+					state.error = action.error as Error;
+				}
+			)
+			.addMatcher(
+				isAnyOf(
+					checkUserSession.fulfilled,
+					googleSignIn.fulfilled,
+					emailSignIn.fulfilled,
+					signUp.fulfilled,
+					signOut.fulfilled
+				),
+				(state, action) => {
+					state.status = "resolved";
+					state.currentUser = action.payload;
+				}
+			);
 	},
 });
 

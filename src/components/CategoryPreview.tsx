@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 
 import ProductCard from "./ProductCard";
 
-function CategoryPreview({ categoryKey, products }) {
+import type { CategoryItem } from "../store/categories/categoriesTypes";
+
+function CategoryPreview({
+	categoryKey,
+	products,
+}: {
+	categoryKey: string;
+	products: CategoryItem[];
+}) {
 	return (
 		<div className="mb-7 flex flex-col">
 			<h2 className="mt-3 mb-6">

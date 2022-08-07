@@ -6,7 +6,9 @@ import Button from "./Button";
 import { selectCartItems } from "../store/cart/cartSelector";
 import { addItemToCart } from "../store/cart/cartAction";
 
-function ProductCard({ product }) {
+import type { CategoryItem } from "../store/categories/categoriesTypes";
+
+function ProductCard({ product }: { product: CategoryItem }) {
 	const cartItems = useSelector(selectCartItems);
 	const dispatch = useDispatch();
 

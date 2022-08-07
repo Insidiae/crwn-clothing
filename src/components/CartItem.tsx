@@ -1,6 +1,8 @@
 import * as React from "react";
 
-function CartItem({ cartItem }) {
+import type { CartItem as CartItemType } from "../store/cart/cartTypes";
+
+function CartItem({ cartItem }: { cartItem: CartItemType }) {
 	return (
 		<div className="w-full h-20 mb-4 flex">
 			<img

@@ -8,7 +8,7 @@ import { persistor, store } from "../store/store";
 
 import { stripePromise } from "../utils/stripe";
 
-export function AppProviders({ children }) {
+export function AppProviders({ children }: React.PropsWithChildren) {
 	return (
 		<BrowserRouter>
 			<PersistGate loading={null} persistor={persistor}>

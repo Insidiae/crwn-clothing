@@ -1,14 +1,13 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
+import { AuthErrorCodes } from "firebase/auth";
 
 import Button from "./Button";
 import FormInput from "./FormInput";
 
-import {
-	signInAuthUserWithEmailAndPassword,
-	signInWithGooglePopup,
-} from "../utils/firebase";
 import { googleSignInStart, emailSignInStart } from "../store/user/userAction";
+
+import type { AuthError } from "firebase/auth";
 
 const defaultFormFields = {
 	email: "",
@@ -21,26 +20,28 @@ function SignInForm() {
 	const [formFields, setFormFields] = React.useState(defaultFormFields);
 	const { email, password } = formFields;
 
-	function handleChange(event) {
+	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const { name, value } = event.currentTarget;
 
 		setFormFields({ ...formFields, [name]: value });
 	}
 
-	async function handleSubmit(event) {
+	async function handleSubmit(event: React.FormEvent) {
 		event.preventDefault();
 
 		try {
 			dispatch(emailSignInStart(email, password));
 			setFormFields(defaultFormFields);
 		} catch (err) {
+			const { code } = err as AuthError;
+
 			if (
-				err.code === "auth/wrong-password" ||
-				err.code === "auth/user-not-found"
+				code === AuthErrorCodes.INVALID_PASSWORD ||
+				code === AuthErrorCodes.USER_DELETED
 			) {
 				alert("Incorrect username or password.");
 			} else {
-				console.error("There was an error in signing in:", err.message);
+				console.error("There was an error in signing in:", err);
 			}
 		}
 	}

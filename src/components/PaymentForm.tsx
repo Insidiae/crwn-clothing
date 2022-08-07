@@ -7,6 +7,12 @@ import Button from "./Button";
 import { selectCurrentUser } from "../store/user/userSelector";
 import { selectCartTotal } from "../store/cart/cartSelector";
 
+import type { StripeCardElement } from "@stripe/stripe-js";
+
+const isValidCardElement = (
+	card: StripeCardElement | null
+): card is StripeCardElement => card !== null;
+
 function PaymentForm() {
 	const stripe = useStripe();
 	const elements = useElements();
@@ -16,7 +22,7 @@ function PaymentForm() {
 
 	const [isProcessingPayment, setIsProcessingPayment] = React.useState(false);
 
-	async function handlePayment(event) {
+	async function handlePayment(event: React.FormEvent) {
 		event.preventDefault();
 
 		if (stripe && elements) {
@@ -38,21 +44,25 @@ function PaymentForm() {
 
 			const clientSecret = response.paymentIntent.client_secret;
 
-			const paymentResult = await stripe.confirmCardPayment(clientSecret, {
-				payment_method: {
-					card: elements.getElement(CardElement),
-					billing_details: {
-						name: currentUser?.displayName || "Guest User",
+			const cardDetails = elements.getElement(CardElement);
+
+			if (isValidCardElement(cardDetails)) {
+				const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+					payment_method: {
+						card: cardDetails,
+						billing_details: {
+							name: currentUser?.displayName || "Guest User",
+						},
 					},
-				},
-			});
+				});
 
-			setIsProcessingPayment(false);
+				setIsProcessingPayment(false);
 
-			if (paymentResult.error) {
-				alert(paymentResult.error);
-			} else if (paymentResult.paymentIntent.status === "succeeded") {
-				alert("Payment Succeeded!");
+				if (paymentResult.error) {
+					alert(paymentResult.error);
+				} else if (paymentResult.paymentIntent.status === "succeeded") {
+					alert("Payment Succeeded!");
+				}
 			}
 		}
 	}

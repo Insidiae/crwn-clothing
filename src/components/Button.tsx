@@ -1,6 +1,16 @@
 import * as React from "react";
 
-function Button({ children, className, theme = "default", ...otherProps }) {
+export type ButtonProps = {
+	className?: string;
+	theme?: keyof typeof buttonThemeStyles;
+};
+
+function Button({
+	children,
+	className,
+	theme = "default",
+	...otherProps
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps) {
 	const themeStyle = buttonThemeStyles[theme];
 
 	return (

@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-function DirectoryItem({ category }) {
+import type { Category } from "../store/categories/categoriesTypes";
+
+function DirectoryItem({ category }: { category: Category }) {
 	return (
 		<Link
 			to={`/shop/${category.title}`}

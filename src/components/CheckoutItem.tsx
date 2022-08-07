@@ -8,7 +8,9 @@ import {
 	removeItemFromCart,
 } from "../store/cart/cartAction";
 
-function CheckoutItem({ cartItem }) {
+import type { CartItem } from "../store/cart/cartTypes";
+
+function CheckoutItem({ cartItem }: { cartItem: CartItem }) {
 	const cartItems = useSelector(selectCartItems);
 	const dispatch = useDispatch();
 

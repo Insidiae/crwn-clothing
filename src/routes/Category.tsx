@@ -10,12 +10,16 @@ import {
 	selectCategoriesStatus,
 } from "../store/categories/categoriesSelector";
 
+type CategoryRouteParams = {
+	category: string;
+};
+
 function Category() {
 	const categoriesStatus = useSelector(selectCategoriesStatus);
 	const categoriesMap = useSelector(selectCategoriesMap);
-	const { category } = useParams();
+	const { category } = useParams<CategoryRouteParams>() as CategoryRouteParams;
 
-	const products = categoriesMap[category]?.items;
+	const products = categoriesMap[category].items;
 
 	return (
 		<>
